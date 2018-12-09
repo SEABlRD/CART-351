@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Assignment2 - Kaleidoscope </title>
+<!-------------->
+<style>
+
+    body{
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      background: black;
+    }
+
+</style>
+<!-------------->
+<script>
+
+
+  window.onload = function(){
+    let canvas = document.getElementById("mycanvas"); // get canvas
+    let context = canvas.getContext("2d"); //establish the drawing context
+    let mouseAngleFromCenter =0; // the angle for determining the mouse
+
+    let im1 = new Image(); // create an image container
+    let im2 = new Image();
+    im1.src = 'https://orig00.deviantart.net/446a/f/2018/278/1/f/square1_by_seablrd-dconm94.png'; // where is the image
+    im2.src = 'https://orig00.deviantart.net/ab96/f/2018/278/3/c/square2_by_seablrd-dcono8w.png';
+    let imageToRotate1= new imageContainer(im1,0,0); // use the custom class
+    let imageToRotate2 = new imageContainer(im2,0,0);
+
+    var canvasClicked = new Boolean();
+
+
+// every time the mouse moves get the coordinates for the mouse (around a circle)
+    canvas.addEventListener("mousemove",function(event){
+    console.log("mousemove");
+    // get mouse
+    let xMouse = event.clientX;
+    let yMouse = event.clientY;
+    mouseAngleFromCenter = getAngle(xMouse,yMouse);
+    //get angle from the center using aTan ...
+    });
+
+
+ // helper function to calculate the angle
+    const getAngle = function(mouseX,mouseY) {
+      var cx = canvas.width / 2; //centerX
+      var cy = canvas.height / 2;//centerY
+      // calculate the angle that mouse is in relation to the center ...
+      return Math.atan2(mouseY - cy, mouseX - cx); //aTan2 -> angle
+    };
+
+
+    requestAnimationFrame(ani); // start the animation
+
+    canvas.addEventListener('click', function(event){
+      console.log("Clicked! " + canvasClicked);
+        canvasClicked = !canvasClicked;
+    });
+
+
+    //animation call back
+    function ani(){
+      if(canvasClicked == false){
+        context.clearRect(0,0,canvas.width,canvas.height);
+        set1();
+        requestAnimationFrame(ani);
+      } else if (canvasClicked == true){
+        context.clearRect(0,0,canvas.width,canvas.height);
+        set2();
+        requestAnimationFrame(ani);
+      }
+    }
+
+
+
+// SETS FOR COLOUR SQUARES
+    function set1(){
+      context.save();
+      letsRun1();
+      context.restore();
+      //
+      context.save();
+      letsRun2();
+      context.restore();
+      //
+      context.save();
+      letsRun3();
+      context.restore();
+      //
+      context.save();
+      letsRun4();
+      context.restore();
+    }
+
+    function set2(){
+      context.save();
+      letsRun5();
+      context.restore();
+      //
+      context.save();
+      letsRun6();
+      context.restore();
+      //
+      context.save();
+      letsRun7();
+      context.restore();
+      //
+      context.save();
+      letsRun8();
+      context.restore();
+    }
+
+
+
+// ALL 8 RUN FUNCTIONS
+/* to use */
+function letsRun1(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(150,150);
+   context.scale(-1,-1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate1.renderImage();
+}
+
+function letsRun2(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(450,150);
+   context.scale(1,-1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate1.renderImage();
+}
+
+function letsRun3(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(450,450);
+   context.scale(1,1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate1.renderImage();
+}
+
+function letsRun4(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(150, 450);
+   context.scale(-1,1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate1.renderImage();
+}
+
+// <!---set 2--->
+
+function letsRun5(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(150,150);
+   context.scale(-1,-1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate2.renderImage();
+
+}
+
+function letsRun6(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(450,150);
+   context.scale(1,-1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate2.renderImage();
+}
+
+function letsRun7(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(450,450);
+   context.scale(1,1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate2.renderImage();
+}
+
+function letsRun8(){
+   context.fillStyle = "#FFFFFF";
+   context.translate(150, 450);
+   context.scale(-1,1);
+   context.rotate(mouseAngleFromCenter);
+   imageToRotate2.renderImage();
+}
+
+
+/*** CLASS TO HOLD IMAGE */
+
+function imageContainer(ref, x,y){
+  // need to make a new Image continer ...
+  this.imageEl = ref;
+  this.xPos =x;
+  this.yPos =y;
+  this.w = this.imageEl.width;
+  this.h = this.imageEl.height;
+    this.renderImage = function(){
+    context.fillStyle = "#FFFFFF";
+    context.drawImage(this.imageEl, -this.w/2,-this.h/2, 300,300);
+  }
+} //end image function
+
+}
+
+</script>
+</head>
+<!-------------->
+<body>
+
+  <canvas id = "mycanvas" width="600" height="600"></canvas>
+
+
+</body>
+</html>
