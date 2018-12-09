@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+	   <title>The Road</title>
+	    <!-- <link rel="shortcut icon" href="add something"> -->
+
+  <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+
+  $(document).ready(function(){
+
+    $("#draginbox").draggable();
+
+    $(".inbox").hide();
+    $(".showinbox").show();
+    $('.showinbox').click(function(){
+        $(".inbox").show();
+    });
+
+    $('.hideinbox').click(function(){
+        $(".inbox").hide();
+    });
+
+    $.getJSON('inventory.json', function(data){
+        console.log(data);
+        loaded = true;
+
+        $('#inbox').append('<li> ' + data.user + " " + data.item);
+
+    });
+
+
+
+  });
+
+
+
+
+  </script>
+
+	<style type="text/CSS">
+/* MAIN */
+    body{
+      background-color: black;
+      height: 100%;
+      color: #B0FEFF;
+      font-family: sans-serif;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    h1{
+      color: #eee;
+    }
+
+    a{
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a:hover {
+	    text-decoration: none;
+	    color: #B0FFCD;
+	   }
+
+     img{
+       height: 300px;
+       width: auto;
+       margin-left: 40%;
+       bottom: 0;
+       z-index: 999;
+       position: absolute;
+     }
+
+/* DIVS */
+    .title{
+      margin-left: 30%;
+      margin-top: 100px;
+    }
+    .box{
+      width: 550px;
+      height: 110px;
+      margin-left: 30%;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .content{
+      width: 550px;
+      height: 90px;
+      padding: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .inbox{
+      float: right;
+      width: 300px;
+      height: 150px;
+      margin-right: 15%;
+      margin-bottom: 50px;
+      background-color: #8CADC8;
+      border: 10px solid #8CADC8;
+      border-radius: 2px;
+      overflow: hidden;
+      font-family: Courier new;
+      color: black;
+      font-weight: bold;
+      position: relative;
+    }
+    .inboxstuff{
+      margin-top: 5px;
+      width: 330px;
+      height: 360px;
+      background-color: white;
+      overflow: scroll;
+    }
+
+    .border {
+      position: fixed;
+      top: 0;
+      left: 0;
+      border: 5px solid #8CADC8;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .topbar{
+      height: 20px;
+      margin: 0px;
+      padding: 5px;
+      font-family: Courier new;
+      background-color: #8CADC8;
+      color: black;
+      font-weight: bold;
+    }
+
+    .xbutton{
+      width: 20px;
+      margin-left: 98%;
+      background-color: #EA3434;
+      border-color: white;
+      border-radius: 2px;
+      margin-left: auto;
+      margin-right: 0;
+      float: right;
+      text-align: center;
+    }
+
+    .bottombar{
+      height: 50px;
+      width: 100%;
+      bottom: 0;
+      position: absolute;
+      padding: 5px;
+      font-family: Courier new;
+      background-color: #8CADC8;
+      color: black;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .healthbar{
+      margin-left: 20%;
+      float: left;
+      font-family: Courier new;
+      background-color: #8CADC8;
+      color: black;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .inventory{
+      width: 90px;
+      margin-left: 70%;
+      padding: 5px;
+      font-family: Courier new;
+      background-color: black;
+      color: black;
+      font-weight: bold;
+    }
+
+  </style>
+
+
+</head>
+
+<!-- SPLIT -->
+
+<body>
+<div class="border">
+  <div class="topbar">&gt; Hello Traveler <div class="xbutton"><a href="welcome.html" title="You wish to start anew?">X</a></div></div>
+<div class="title"><h1>The Road</h1></div>
+<div class="box">
+<div class="content">
+
+  A dirt road stretches to either side of you, one end branching into two, leading in different directions.
+  You hear wind and the rustling of leaves down the forking path <a href="#fork">to your left</a>, and rushing water <a href="theriver.html">to your right</a>.
+
+</br>
+</br>
+
+  <p id="fork">The split in the road brings you up short; which way do you go? There are only two options and both beckon to you, smelling of the earth and wind.
+  </br><a href="theforest.html">The left fork</a> is wooded and shadowed by the thick leaves overhead.
+</br><a href="thefields.html">The right fork</a> leads to a more open space. Or <a href="">go back.</a>
+
+</div>
+</div>
+
+<img src="https://orig00.deviantart.net/13b7/f/2018/332/5/2/theroad_by_seablrd-dct3sk8.png">
+<div class="bottombar"><div class="healthbar">&gt; HEALTH: ❤❤❤❤❤</br>
+    &gt; STAMINA: ❤❤❤❤❤</div><div class="inventory"><a href="#" class="showinbox"> INVENTORY</a></div></div>
+
+    <div id="draginbox" class="inbox">
+      INVENTORY  <div class="xbutton"><a href="#" class="hideinbox">X</a></div>
+
+      <div class="inboxstuff">
+
+      <ul id="inbox">
+      </ul>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
